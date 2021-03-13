@@ -1,9 +1,12 @@
 import random
+
+# Code imports
 from termcolor import colored
 from noise import pnoise2
 
-def generate_land(rows=10, cols=10):
-    data = [" ", ".","-", "#", "!", "$", "!", "#", "-", ".", " "]
+def generate_land(rows=10, cols=10, noise_level=10):
+    data = ["🏔", "🌲", "🌲", "🏡", "🌲", "🌾", "🌴", "🌴", "🌴", "🏖", "🌊", "🌊", "🌊", "🌊", "🏖",  "🌴", "🌴", "🌴", "🏢", "🌲", "🌲",  "🌲"]
+    # data = [" ", ".","-", "#", "!", "$", "!", "#", "-", ".", " "]
     seed = random.randint(0, 100)
     land = ""
 
@@ -11,8 +14,8 @@ def generate_land(rows=10, cols=10):
     for row in range(rows):
         for col in range(cols):
             # Adding noise part 17
-            n = pnoise2(row / rows, col / cols, base=seed)
-            n *= 10
+            n = pnoise2(row / rows, col / cols, base=seed, octaves=5)
+            n *= noise_level
             n = round(n)
             n = n % len(data)
 
@@ -39,10 +42,12 @@ def ask_for_number(question):
     print(colored("Huh, this isn't fun anymore...", "red"))     
     quit()
 
-cols = ask_for_number("How many columns? ")
-rows = ask_for_number("How many rows? ")
+# Only run this code if you play from this file
+if __name__ == "__main__":
+    cols = ask_for_number("How many columns? ")
+    rows = ask_for_number("How many rows? ")
 
 
-output = generate_land(rows, cols)
+    output = generate_land(rows, cols)
 
-print(output)
+    print(output)
