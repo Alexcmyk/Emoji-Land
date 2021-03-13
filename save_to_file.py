@@ -8,7 +8,7 @@ os.makedirs("outputs", exist_ok=True)
 noise_levels = [1, 5, 10, 20, 50, 100, 250, 500]
 
 for nl in noise_levels:
-  output = generate_land(100,100, nl)
+  output = generate_land(200,200, nl)
   filename = os.path.join("outputs", f"noise-levels-{nl}.txt")
 
   with open(filename, "w") as f:
